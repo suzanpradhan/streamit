@@ -1,5 +1,5 @@
 const ic_logo_bottom = "assets/icons/ic_logo_bottom.png";
-const ic_logo = "assets/icons/ic_logo.png";
+const ic_logo = "assets/icons/logo.png";
 const ic_muvi = "assets/icons/ic_muvi.png";
 const ic_walk_background = "assets/images/ic_splash_background.png";
 const ic_phone = "assets/images/ic_phone.png";

@@ -59,7 +59,7 @@ class SplashScreenState extends State<SplashScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Container(
         child: Center(
-          child: Image.asset(ic_loading_gif, fit: BoxFit.cover),
+          child: Image.asset(ic_logo),
         ),
       ),
     );
