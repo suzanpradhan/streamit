@@ -58,7 +58,10 @@ class WatchlistFragmentState extends State<WatchlistFragment> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarWidget('Watchlist', showBack: false, color: Theme.of(context).cardColor, textColor: Colors.white),
+      appBar: appBarWidget('Watchlist',
+          showBack: false,
+          color: Theme.of(context).cardColor,
+          textColor: Colors.white),
       body: FutureBuilder<MovieResponse>(
         future: getWatchList(),
         builder: (_, snap) {
@@ -74,7 +77,8 @@ class WatchlistFragmentState extends State<WatchlistFragment> {
               shrinkWrap: true,
               padding: EdgeInsets.all(8),
               itemBuilder: (context, index) {
-                MovieData data = snap.data!.data![disabledAds ? index : listLength];
+                MovieData data =
+                    snap.data!.data![disabledAds ? index : listLength];
 
                 String genre = '';
 
@@ -87,7 +91,8 @@ class WatchlistFragmentState extends State<WatchlistFragment> {
                     }
                   });
                 }
-                if (index != num && listLength <= snap.data!.data!.length) listLength++;
+                if (index != num && listLength <= snap.data!.data!.length)
+                  listLength++;
                 return index == num && !disabledAds && bannerAd != null
                     ? Container(
                         height: AdSize.banner.height.toDouble(),
@@ -110,15 +115,29 @@ class WatchlistFragmentState extends State<WatchlistFragment> {
                                     clipBehavior: Clip.antiAliasWithSaveLayer,
                                     elevation: spacing_control_half,
                                     margin: EdgeInsets.all(0),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(spacing_control_half)),
-                                    child: commonCacheImageWidget(data.image.validate(), width: context.width() * 0.3, height: 120, fit: BoxFit.cover),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            spacing_control_half)),
+                                    child: commonCacheImageWidget(
+                                        data.image.validate(),
+                                        width: context.width() * 0.3,
+                                        height: 120,
+                                        fit: BoxFit.cover),
                                   ),
                                   Container(
-                                    decoration: BoxDecoration(color: Colors.red, shape: BoxShape.rectangle, borderRadius: radius(4)),
-                                    padding: EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
-                                    margin: EdgeInsets.only(top: 8, bottom: 8, left: 8),
-                                    child: Text(data.censor_rating.validate(), style: primaryTextStyle(size: 10, color: Colors.white)),
-                                  ).visible(data.censor_rating.validate().isNotEmpty),
+                                    decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        shape: BoxShape.rectangle,
+                                        borderRadius: radius(4)),
+                                    padding: EdgeInsets.only(
+                                        left: 8, right: 8, top: 4, bottom: 4),
+                                    margin: EdgeInsets.only(
+                                        top: 8, bottom: 8, left: 8),
+                                    child: Text(data.censor_rating.validate(),
+                                        style: primaryTextStyle(
+                                            size: 10, color: Colors.white)),
+                                  ).visible(
+                                      data.censor_rating.validate().isNotEmpty),
                                 ],
                               ),
                             ),
@@ -130,7 +149,9 @@ class WatchlistFragmentState extends State<WatchlistFragment> {
                                   Row(
                                     children: [
                                       itemTitle(context, data.title!).expand(),
-                                      Icon(Icons.bookmark).paddingAll(2).onTap(() {
+                                      Icon(Icons.bookmark)
+                                          .paddingAll(2)
+                                          .onTap(() {
                                         if (!mIsLoggedIn) {
                                           SignInScreen().launch(context);
                                           return;
@@ -152,10 +173,14 @@ class WatchlistFragmentState extends State<WatchlistFragment> {
                                       }),
                                     ],
                                   ),
-                                  itemSubTitle(context, data.release_date.validate(), fontsize: 12),
+                                  itemSubTitle(
+                                      context, data.release_date.validate(),
+                                      fontsize: 12),
                                   //itemSubTitle(context, '${buildLikeCountText(data.likes.validate())}', fontsize: 12),
                                   2.height,
-                                  itemSubTitle(context, genre, colorThird: true, fontsize: ts_medium).visible(genre.isNotEmpty),
+                                  itemSubTitle(context, genre,
+                                          colorThird: true, fontsize: ts_medium)
+                                      .visible(genre.isNotEmpty),
                                 ],
                               ),
                             )
@@ -169,8 +194,10 @@ class WatchlistFragmentState extends State<WatchlistFragment> {
           } else {
             return snapWidgetHelper(
               snap,
-              loadingWidget: Image.asset(ic_loading_gif, fit: BoxFit.cover, height: 100, width: 100).center(),
-              errorWidget: Text(errorMessage, style: boldTextStyle(color: Colors.white)).center(),
+              loadingWidget: CircularProgressIndicator().center(),
+              errorWidget:
+                  Text(errorMessage, style: boldTextStyle(color: Colors.white))
+                      .center(),
             );
           }
         },

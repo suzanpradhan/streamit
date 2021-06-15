@@ -38,10 +38,12 @@ class HomeCategoryFragmentState extends State<HomeCategoryFragment> {
       body: Container(
         alignment: Alignment.topCenter,
         child: FutureBuilder<DashboardResponse>(
-          future: getDashboardData({}, type: widget.type.validate(value: dashboardTypeHome)),
+          future: getDashboardData({},
+              type: widget.type.validate(value: dashboardTypeHome)),
           builder: (_, snap) {
             if (snap.hasData) {
-              if (snap.data!.banner.validate().isEmpty && snap.data!.sliders.validate().isEmpty) {
+              if (snap.data!.banner.validate().isEmpty &&
+                  snap.data!.sliders.validate().isEmpty) {
                 return noDataWidget();
               }
 
@@ -63,12 +65,28 @@ class HomeCategoryFragmentState extends State<HomeCategoryFragment> {
                             children: [
                               Row(
                                 children: [
-                                  Text(e.title.validate(), style: boldTextStyle(color: Colors.white)).paddingLeft(16).expand(),
-                                  Text('View all', style: secondaryTextStyle(color: Colors.white, size: 12)).paddingOnly(right: 16, left: 16, top: 8, bottom: 8).onTap(() {
-                                    ViewAllMoviesScreen(snap.data!.sliders!.indexOf(e), widget.type).launch(context);
+                                  Text(e.title.validate(),
+                                          style: boldTextStyle(
+                                              color: Colors.white))
+                                      .paddingLeft(16)
+                                      .expand(),
+                                  Text('View all',
+                                          style: secondaryTextStyle(
+                                              color: Colors.white, size: 12))
+                                      .paddingOnly(
+                                          right: 16,
+                                          left: 16,
+                                          top: 8,
+                                          bottom: 8)
+                                      .onTap(() {
+                                    ViewAllMoviesScreen(
+                                            snap.data!.sliders!.indexOf(e),
+                                            widget.type)
+                                        .launch(context);
                                   }).visible(e.viewAll.validate()),
                                 ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                               ).visible(e.data.validate().isNotEmpty),
                               16.height,
                               ItemHorizontalList(e.data.validate()),
@@ -81,7 +99,9 @@ class HomeCategoryFragmentState extends State<HomeCategoryFragment> {
                 ),
               );
             } else {
-              return snapWidgetHelper(snap, loadingWidget: Image.asset(ic_loading_gif, fit: BoxFit.cover, height: 100, width: 100)).center();
+              return snapWidgetHelper(snap,
+                      loadingWidget: CircularProgressIndicator())
+                  .center();
             }
           },
         ),
